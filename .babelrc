@@ -1,0 +1,11 @@
+{
+  "env": {
+    "production": {
+        "comments": false,
+    }
+  },
+  "ignore": [
+    "**/__mocks__"
+  ],
+  "presets": [ "@babel/env" ],
+}
