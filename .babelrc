@@ -2,10 +2,11 @@
   "env": {
     "production": {
         "comments": false,
+        "ignore": ["**/*.spec.js"],
     }
   },
   "ignore": [
-    "**/__mocks__"
+    "**/*/__mocks__"
   ],
   "presets": [ "@babel/env" ],
 }
