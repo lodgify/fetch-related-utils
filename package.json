@@ -1,6 +1,6 @@
 {
   "name": "@lodgify/fetch-helpers",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple helpers for the fetch api.",
   "main": "lib/index.js",
   "config": {
