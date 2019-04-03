@@ -12,6 +12,9 @@
   "files": [
     "lib"
   ],
+  "release": {
+    "extends": "./tools/semantic-release/release.config.js"
+  },
   "scripts": {
     "build:js": "BABEL_ENV=production babel src/ -d lib/",
     "build": "npm run clean && npm run build:js",
