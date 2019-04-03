@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "description": "Simple helpers for the fetch api.",
   "main": "lib/index.js",
+  "config": {
+    "jest_config": "tools/jest/jest.config.js",
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "files": [
     "lib"
   ],
