@@ -6,9 +6,10 @@ import { parseJSONResponse } from '../utils/parseJSONResponse';
  * @param  {string} url
  * @param  {Object} body
  * @param  {Object} [headers={}]
+ * @param  {Object} [options={}]
  * @return {Promise}
  */
-export const postJSON = (url, body, headers = {}) =>
+export const postJSON = (url, body, headers = {}, options = {}) =>
   fetch(url, {
     method: POST,
     headers: {
@@ -16,6 +17,7 @@ export const postJSON = (url, body, headers = {}) =>
       ...headers,
     },
     body: JSON.stringify(body),
+    ...options,
   })
     .then(handleErrors)
     .then(parseJSONResponse);
