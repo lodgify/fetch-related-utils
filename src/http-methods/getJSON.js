@@ -1,5 +1,3 @@
-import 'isomorphic-fetch';
-
 import { GET } from '../constants';
 import { handleErrors } from '../utils/handleErrors';
 import { parseJSONResponse } from '../utils/parseJSONResponse';

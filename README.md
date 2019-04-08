@@ -1,14 +1,14 @@
-# Isomorphic fetch helpers
+# Fetch related utils
 
-Simple helpers for [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch).
+Simple helpers for fetch.
 
 ## Install
 
-`$ npm install @lodgify/isomorphic-fetch-helpers`
+`$ npm install @lodgify/fetch-related-utils`
 
 ## Usage
 ```js
-import { postJSON } from '@lodgify/isomorphic-fetch-helpers';
+import { postJSON } from '@lodgify/fetch-related-utils';
 
 const url = "www.lassie.com";
 const body = {
@@ -23,4 +23,4 @@ postJSON(url, body, customHeaders);
 
 ## Contributing
 
-See [contributing](https://github.com/lodgify/fetch-helpers/blob/master/docs/CONTRIBUTING.md).
+See [contributing](https://github.com/lodgify/fetch-related-utils/blob/master/docs/CONTRIBUTING.md).

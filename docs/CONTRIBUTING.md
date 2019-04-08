@@ -7,7 +7,7 @@ Our git commits follow a strict format so they can be analysed by [semantic-rele
 
 #### Pull requests
 
-- Open a PR into the [master branch](https://github.com/lodgify/fetch-helpers/tree/master).
+- Open a PR into the [master branch](https://github.com/lodgify/fetch-related-utils/tree/master).
 - The PR Opener adds contributors as Reviewers *and* Assignees.
 - Each Reviewer completes a review. Reviewer removes themself as Assignee.
 - If action is required, Reviewer adds Opener as Assignee.
@@ -15,7 +15,7 @@ Our git commits follow a strict format so they can be analysed by [semantic-rele
 
 A PR cannot be merged if:
 - It breaks [Wheaton's Law](http://www.wheatonslaw.com/)
-- It doesn't follow project [code conventions](https://github.com/lodgify/fetch-helpers/blob/master/docs/CONVENTIONS.md)
+- It doesn't follow project [code conventions](https://github.com/lodgify/fetch-related-utils/blob/master/docs/CONVENTIONS.md)
 - Any of the following commands fail when run by Travis
   - `npm run lint`
   - `npm run test`

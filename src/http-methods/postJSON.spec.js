@@ -1,5 +1,3 @@
-jest.mock('isomorphic-fetch');
-
 import { POST, POST_JSON_HEADERS } from '../constants';
 import { handleErrors } from '../utils/handleErrors';
 import { parseJSONResponse } from '../utils/parseJSONResponse';
