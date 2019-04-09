@@ -23,4 +23,4 @@ postJSON(url, body, customHeaders);
 
 ## Contributing
 
-See [contributing](https://github.com/lodgify/fetch-related-utils/blob/master/docs/CONTRIBUTING.md).
+See [contributing](https://github.com/lodgify/fetch-helpers/blob/master/docs/CONTRIBUTING.md).
