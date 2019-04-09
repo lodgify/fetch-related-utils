@@ -1,5 +1,5 @@
 {
-  "name": "@lodgify/fetch-related-utils",
+  "name": "@lodgify/fetch-helpers",
   "version": "1.0.2",
   "description": "Simple helpers for the fetch api.",
   "main": "lib/index.js",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lodgify/fetch-related-utils.git"
+    "url": "git+https://github.com/lodgify/fetch-helpers.git"
   },
   "keywords": [
     "fetch"
