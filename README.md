@@ -1,14 +1,14 @@
-# Fetch related utils
+# Fetch helpers
 
 Simple helpers for fetch.
 
 ## Install
 
-`$ npm install @lodgify/fetch-related-utils`
+`$ npm install @lodgify/fetch-helpers`
 
 ## Usage
 ```js
-import { postJSON } from '@lodgify/fetch-related-utils';
+import { postJSON } from '@lodgify/fetch-helpers';
 
 const url = "www.lassie.com";
 const body = {
