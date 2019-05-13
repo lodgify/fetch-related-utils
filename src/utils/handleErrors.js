@@ -1,3 +1,5 @@
+import { getParsedBody } from './getParsedBody';
+
 /**
  * Helper for throwing Error if response to fetch is not ok
  * @param  {Object} response
@@ -6,11 +8,33 @@
  */
 export const handleErrors = response => {
   if (!response.ok) {
-    if (response.status >= 500) {
+    const { status, statusText, url } = response;
+    const error = new Error(status);
+
+    getParsedBody(response).then(parsedBody => {
+      const body = JSON.stringify(parsedBody, null, ' ');
+
       // eslint-disable-next-line no-console
-      console.error(response);
-    }
-    throw Error(response.statusText);
+      console.log(`
+
+       ██████╗ ██╗  ██╗    ███╗   ██╗ ██████╗ 
+      ██╔═══██╗██║  ██║    ████╗  ██║██╔═══██╗
+      ██║   ██║███████║    ██╔██╗ ██║██║   ██║
+      ██║   ██║██╔══██║    ██║╚██╗██║██║   ██║
+      ╚██████╔╝██║  ██║    ██║ ╚████║╚██████╔╝
+       ╚═════╝ ╚═╝  ╚═╝    ╚═╝  ╚═══╝ ╚═════╝ 
+                        
+        This sucks... 
+       
+        Request to ${url} failed.
+        Status code: ${status}
+        Status text: ${statusText}
+        Body: ${body}
+      `);
+    });
+
+    throw error;
   }
+
   return response;
 };

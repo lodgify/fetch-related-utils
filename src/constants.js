@@ -1,6 +1,8 @@
 const ACCEPT = 'Accept';
 const CONTENT_TYPE = 'Content-Type';
-const APPLICATION_JSON = 'application/json';
+
+export const APPLICATION_JSON = 'application/json';
+export const TEXT_PLAIN = 'text/plain';
 
 export const GET = 'GET';
 
