@@ -60,9 +60,6 @@ typings/
  # jest tmp directory
 tools/jest/tmp/
 
- # lock files
-package-lock.json
-
  # Built files
 dist/
 gh-pages/
