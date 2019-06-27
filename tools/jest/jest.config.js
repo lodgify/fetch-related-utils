@@ -26,7 +26,7 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
   },
-  roots: ['<rootDir>/src/components', '<rootDir>/src/utils'],
+  roots: ['<rootDir>/src'],
   setupTestFrameworkScriptFile: '<rootDir>/tools/jest/jest.framework-setup.js',
   // https://github.com/facebook/jest/issues/3285
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
