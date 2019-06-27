@@ -1,5 +1,3 @@
-import { getParsedBody } from './getParsedBody';
-
 /**
  * Helper for throwing Error if response to fetch is not ok
  * @param  {Object} response
@@ -9,32 +7,22 @@ import { getParsedBody } from './getParsedBody';
 export const handleErrors = response => {
   if (!response.ok) {
     const { status, statusText, url } = response;
-    const error = new Error(status);
 
-    getParsedBody(response).then(parsedBody => {
-      const body = JSON.stringify(parsedBody, null, ' ');
-
-      // eslint-disable-next-line no-console
-      console.log(`
-
-       ██████╗ ██╗  ██╗    ███╗   ██╗ ██████╗ 
-      ██╔═══██╗██║  ██║    ████╗  ██║██╔═══██╗
-      ██║   ██║███████║    ██╔██╗ ██║██║   ██║
-      ██║   ██║██╔══██║    ██║╚██╗██║██║   ██║
-      ╚██████╔╝██║  ██║    ██║ ╚████║╚██████╔╝
-       ╚═════╝ ╚═╝  ╚═╝    ╚═╝  ╚═══╝ ╚═════╝ 
-                        
-        This sucks... 
-       
-        Request to ${url} failed.
-        Status code: ${status}
-        Status text: ${statusText}
-        Body: ${body}
-      `);
+    return response.text().then(body => {
+      // istanbul ignore next
+      if (!global.location)
+        // eslint-disable-next-line no-console
+        console.log(
+          `Request failed | url: ${url} status: ${status} statusText: ${statusText} body: ${body}`
+        );
+      return Promise.reject({
+        body,
+        status,
+        statusText,
+        url,
+      });
     });
-
-    throw error;
   }
 
-  return response;
+  return Promise.resolve(response);
 };
