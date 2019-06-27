@@ -6,6 +6,9 @@ import { getJSON } from './getJSON';
 
 const url = 'someUrl';
 
+global.fetch = jest.fn(() => fetch);
+fetch.then = jest.fn(() => fetch);
+
 describe('get', () => {
   beforeAll(() => {
     getJSON(url);
