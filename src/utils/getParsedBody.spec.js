@@ -1,8 +1,8 @@
-jest.mock('lodash');
+jest.mock('lodash.get');
 jest.mock('./parseTextResponse');
 jest.mock('./parseJSONResponse');
 
-import { get } from 'lodash';
+import get from 'lodash.get';
 
 import { TEXT_PLAIN, APPLICATION_JSON } from '../constants';
 
@@ -29,6 +29,7 @@ describe('`getParsedBody`', () => {
       'headers',
       '_headers',
       'content-type',
+      0,
     ]);
   });
 
