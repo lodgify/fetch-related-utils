@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import get from 'lodash.get';
 
 import { TEXT_PLAIN, APPLICATION_JSON } from '../constants';
 
@@ -10,7 +10,7 @@ import { parseJSONResponse } from './parseJSONResponse';
  * @return {Promise}
  */
 export const getParsedBody = response => {
-  const contentType = get(response, ['headers', '_headers', 'content-type'])[0];
+  const contentType = get(response, ['headers', '_headers', 'content-type', 0]);
 
   if (contentType === TEXT_PLAIN) return parseTextResponse(response);
 

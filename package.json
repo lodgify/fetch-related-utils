@@ -61,5 +61,8 @@
     "jest": "^24.7.0",
     "prettier": "^1.16.4",
     "semantic-release": "^15.13.3"
+  },
+  "dependencies": {
+    "lodash.get": "^4.4.2"
   }
 }
