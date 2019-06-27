@@ -1,92 +1,101 @@
-jest.mock('./getParsedBody');
-
 import { handleErrors } from './handleErrors';
-import { getParsedBody } from './getParsedBody';
 
-const response = {
-  ok: false,
-  url: 'sombala',
-  status: '9999',
-  statusText: 'the end',
-  body: { letTheBodies: 'hit the floor' },
-  headers: {
-    _headers: {
-      'content-type': ['seren/dipity'],
-    },
-  },
+const body = 'some body';
+const status = 'some status';
+const statusText = 'some statusText';
+const url = 'some url';
+
+const REJECTED = 'REJJED';
+const RESOLVED = 'OK';
+
+Promise = {
+  reject: jest.fn(() => REJECTED),
+  resolve: jest.fn(() => RESOLVED),
 };
 
-const { body, status, statusText, url } = response;
-
-const errorMessage = `
-           
- This sucks... 
-
- Request to ${url} failed.
- Status code: ${status}
- Status text: ${statusText}
- Body: ${body}
-`;
-
-JSON.stringify = jest.fn(() => 'BIP, BOOP, BURI, ICH...');
-// eslint-disable-next-line no-console
-console.log = jest.fn();
-
-getParsedBody.mockImplementation(() => getParsedBody);
-getParsedBody.then = jest.fn();
-
-getParsedBody.then.mockImplementation(callback => {
-  callback(response);
-  JSON.stringify;
-  // eslint-disable-next-line no-console
-  console.log(errorMessage);
-  return getParsedBody;
-});
-getParsedBody.firstThenArg = response;
+const response = {
+  status,
+  statusText,
+  text: jest.fn(() => response),
+  then: jest.fn(callback => callback(body)),
+  url,
+};
 
 describe('handleErrors', () => {
-  beforeAll(() => {
-    try {
-      handleErrors(response);
-    } catch (error) {}
-  });
+  describe('if `response.ok` is `false`', () => {
+    it('should call `response.text`', () => {
+      response.text.mockClear();
+      handleErrors({
+        ...response,
+        ok: false,
+      });
 
-  describe('if response is ok', () => {
-    it('should return the response', () => {
-      const okResponse = { ok: true };
-      const actual = handleErrors(okResponse);
+      expect(response.text).toHaveBeenCalled();
+    });
 
-      expect(actual).toBe(okResponse);
+    it('should call `response.text().then`', () => {
+      response.then.mockClear();
+      handleErrors({
+        ...response,
+        ok: false,
+      });
+
+      expect(response.then).toHaveBeenCalledWith(expect.any(Function));
+    });
+
+    it('should call `Promise.reject` with the right arguments', () => {
+      Promise.reject.mockClear();
+      handleErrors({
+        ...response,
+        ok: false,
+      });
+
+      expect(Promise.reject).toHaveBeenCalledWith({
+        body,
+        status,
+        statusText,
+        url,
+      });
+    });
+
+    it('should return whatever `Promise.reject` returns', () => {
+      const actual = handleErrors({
+        ...response,
+        ok: false,
+      });
+
+      expect(actual).toBe(REJECTED);
     });
   });
 
-  describe('if response is not ok', () => {
-    it('should call `getParsedBody` with the right argument', () => {
-      expect(getParsedBody).toHaveBeenCalledWith(response);
+  describe('if `response.ok` is `true`', () => {
+    it('should not call `response.text`', () => {
+      response.text.mockClear();
+      handleErrors({
+        ...response,
+        ok: true,
+      });
+
+      expect(response.text).not.toHaveBeenCalled();
     });
-    describe('`getParsedBody`', () => {
-      it('should call `getParsedBody.then` the first time with a function', () => {
-        expect(getParsedBody.then).toHaveBeenCalledWith(expect.any(Function));
+
+    it('should call `Promise.resolve` with the right arguments', () => {
+      Promise.resolve.mockClear();
+      handleErrors({
+        ...response,
+        ok: true,
       });
 
-      describe('the function passed to  `getParsedBody.then`', () => {
-        it('should call `JSON.stringify` with the right argument', () => {
-          expect(JSON.stringify).toHaveBeenCalledWith(response, null, ' ');
-        });
+      expect(Promise.resolve).toHaveBeenCalledWith({ ...response, ok: true });
+    });
 
-        it('should log the `status`, `statusText`, `url` and `body` of the response', () => {
-          // eslint-disable-next-line no-console
-          expect(console.log).toHaveBeenCalledWith(
-            expect.stringContaining(errorMessage)
-          );
-        });
+    it('should return whatever `Promise.resolve` returns', () => {
+      const actual = handleErrors({
+        ...response,
+        ok: true,
       });
 
-      it('should throw and Error', () => {
-        expect(() => {
-          handleErrors(response);
-        }).toThrowError(status);
-      });
+      expect(actual).toBe(RESOLVED);
     });
   });
 });

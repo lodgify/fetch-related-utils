@@ -7,6 +7,9 @@ import { postJSON } from './postJSON';
 const url = 'someUrl';
 const body = '📝';
 
+global.fetch = jest.fn(() => fetch);
+fetch.then = jest.fn(() => fetch);
+
 describe('get', () => {
   beforeAll(() => {
     postJSON(url, body);
